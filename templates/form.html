@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ops- Risk Event Form</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+<style>
+    body { font-family: 'Inter', Arial, sans-serif; background: #f4f6fa; }
+    .card { border-radius: 18px; border: 3px solid #223366; background: #f7fbff; }
+    h2, h5 { color: #1a237e; font-weight: 600; }
+    .form-label { color: #223366; font-weight: 700 !important; }
+    .form-select, .form-control { border-radius: 8px; }
+.form-highlight {
+    background: #eaf1fb;
+    border: 1px solid #b6c7e6;
+    padding: 18px 14px 10px 14px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    box-shadow: 0 1px 2px rgba(34,51,102,0.04);
+}
+.form-text.text-muted {
+    display: none;
+}
+.definition-inline {
+    font-size: 0.89em;
+    color: #3b6ea5;
+    font-style: italic;
+    font-weight: 400;
+}
+    .btn-primary { background: #223366; border: none; font-weight: 600; letter-spacing: 0.5px; }
+    .btn-primary:hover { background: #1a237e; }
+    .invalid-feedback { font-size: 0.95em; }
+    .card { box-shadow: 0 8px 32px rgba(34,51,102,0.08); }
+    .refresh-btn { position: absolute; top: 24px; right: 32px; z-index: 10; }
+</style>
+</head>
+<body style="background: #f4f6fa;">
+<div style="max-width: 100vw; min-height: 100vh; border: 4px solid #223366; border-radius: 30px; padding: 32px 0 32px 0; box-sizing: border-box; margin:24px auto;">
+
+<div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow-lg border-0 position-relative">
+    <button type="button" class="btn btn-outline-primary refresh-btn" onclick="window.location.reload()" title="Refresh">
+        <i class="bi bi-arrow-clockwise"></i>
+    </button>
+    <div class="card-body p-4">
+        <div class="mb-4">
+    <div class="position-absolute" style="top: 18px; left: 22px; z-index: 20;">
+    <div class="btn-group" role="group" aria-label="Form Mini Actions">
+        <button type="button" class="btn btn-outline-success btn-sm px-2 py-1 me-1" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Open New Form"><i class="bi bi-plus"></i></button>
+        <button type="button" class="btn btn-outline-primary btn-sm px-2 py-1 me-1" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Save Form"><i class="bi bi-save"></i></button>
+        <button type="button" class="btn btn-outline-danger btn-sm px-2 py-1" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete"><i class="bi bi-trash"></i></button>
+    </div>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+  tooltipTriggerList.forEach(function (tooltipTriggerEl) {
+    new bootstrap.Tooltip(tooltipTriggerEl);
+  });
+});
+</script>
+                    <div class="text-center mb-4">
+                        
+                        <h2 class="mb-1" style="font-weight:600;color:#223366;">Ops- Risk Event Form</h2>
+                        <div class="text-muted" style="font-size:1.1rem;">Please fill out all required details below</div>
+                    </div>
+                    {% with messages = get_flashed_messages(with_categories=true) %}
+                      {% if messages %}
+                        {% for category, message in messages %}
+                          <div class="alert alert-{{category}}">{{ message }}</div>
+                        {% endfor %}
+                      {% endif %}
+                    {% endwith %}
+                    <form method="POST" enctype="multipart/form-data" class="row g-4 needs-validation" novalidate>
+        <div class="col-md-3 form-highlight">
+    <label class="form-label">Entered By <span class="text-danger" title="Required">*</span> <span class="definition-inline">(Your full name as the form submitter)</span></label>
+    <input type="text" class="form-control" name="entered_by" required>
+<div class="invalid-feedback">Please enter your name.</div>
+</div>
+<div class="col-md-3 form-highlight">
+    <label class="form-label">Email <span class="text-danger" title="Required">*</span> <span class="definition-inline">(Your business email address)</span></label>
+    <input type="email" class="form-control" name="email" required>
+<div class="invalid-feedback">Please enter a valid email.</div>
+</div>
+        <hr class="my-3">
+<div class="col-12 form-highlight" style="background: #e6f0fa; border-left: 5px solid #3b6ea5;">
+    <h5 class="mt-3 mb-1" style="font-weight: 700; color: #223366; letter-spacing: 0.5px;">General Details</h5>
+    <div class="mb-2" style="font-size:0.97em; color:#3b6ea5; font-style:italic;">Provide the core event details below.</div>
+</div>
+        <div class="col-md-4 form-highlight">
+            <label class="form-label">Event Start Date <span class="text-danger" title="Required">*</span> <span class="definition-inline">(Date when the risk event began)</span></label>
+            <input type="date" class="form-control" name="event_start_date" required>
+<div class="invalid-feedback">Please select the event start date.</div>
+        </div>
+        <div class="col-md-4 form-highlight">
+            <label class="form-label">Event End Date <span class="definition-inline">(Date when the risk event ended, if applicable)</span></label>
+            <input type="date" class="form-control" name="event_end_date">
+        </div>
+        <div class="col-md-4 form-highlight">
+            <label class="form-label">Reported Date <span class="text-danger" title="Required">*</span> <span class="definition-inline">(Date when the event was reported)</span></label>
+            <input type="date" class="form-control" name="reported_date" required>
+<div class="invalid-feedback">Please select the reported date.</div>
+        </div>
+        <div class="col-md-4 form-highlight">
+            <label class="form-label">Reported By <span class="definition-inline">(Person who reported the event)</span></label>
+            <input type="text" class="form-control" name="reported_by">
+        </div>
+        <div class="col-md-4 form-highlight">
+            <label class="form-label">Originating Department <span class="definition-inline">(Department where the event originated)</span></label>
+            <input type="text" class="form-control" name="originating_department">
+        </div>
+        <div class="col-md-4 form-highlight">
+            <label class="form-label">Sub Department <span class="definition-inline">(Sub-division within the originating department)</span></label>
+            <input type="text" class="form-control" name="sub_department">
+        </div>
+        <div class="col-12 form-highlight">
+            <label class="form-label">Event Description Details <span class="text-danger" title="Required">*</span> <span class="definition-inline">(Briefly describe the type of event that occurred)</span></label>
+            <textarea class="form-control" name="event_description_details" rows="2" required></textarea>
+<div class="invalid-feedback">Please describe the event.</div>
+        </div>
+        <div class="col-md-6 form-highlight">
+            <label class="form-label">Risk Area <span class="text-danger" title="Required">*</span> <span class="definition-inline">(Which area or team was impacted?)</span></label>
+            <select class="form-select" name="risk_area" required>
+    <option value="">Select</option>
+    {% for area in risk_areas %}
+    <option value="{{ area }}">{{ area }}</option>
+    {% endfor %}
+</select>
+<div class="invalid-feedback">Please select a risk area.</div>
+            </select>
+        </div>
+        <div class="col-md-6 form-highlight">
+            <label class="form-label">Event Type <span class="text-danger" title="Required">*</span> <span class="definition-inline">(Select whether this is a loss event or a near miss)</span></label>
+            <select class="form-select" name="event_type" required>
+    <option value="">Select</option>
+    {% for et in event_types %}
+    <option value="{{ et }}">{{ et }}</option>
+    {% endfor %}
+</select>
+<div class="invalid-feedback">Please select an event type.</div>
+            </select>
+        </div>
+        <div class="col-md-6 form-highlight">
+            <label class="form-label">Country of Occurrence <span class="text-danger" title="Required">*</span> <span class="definition-inline">(Country where the event took place)</span></label>
+            <select class="form-select" name="country_of_occurrence" required>
+    <option value="">Select</option>
+    {% for country in countries %}
+    <option value="{{ country }}">{{ country }}</option>
+    {% endfor %}
+</select>
+<div class="invalid-feedback">Please select a country.</div>
+            </select>
+        </div>
+        <div class="col-md-6 form-highlight">
+            <label class="form-label">Financial Impact (in USD) <span class="text-danger" title="Required">*</span> <span class="definition-inline">(Estimated financial impact. Select currency if not USD)</span></label>
+            <input type="number" step="0.01" class="form-control" name="financial_impact" required>
+<div class="invalid-feedback">Please enter the financial impact.</div>
+            <select class="form-select mt-2" name="currency">
+                {% for curr in currencies %}
+                <option value="{{ curr }}">{{ curr }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="col-md-6 form-highlight">
+            <label class="form-label">Impact Rating <span class="text-danger" title="Required">*</span> <span class="definition-inline">(Select if the impact is financial or reputational)</span></label>
+            <select class="form-select" name="impact_rating" required>
+    <option value="">Select</option>
+    {% for ir in impact_ratings %}
+    <option value="{{ ir }}">{{ ir }}</option>
+    {% endfor %}
+</select>
+<div class="invalid-feedback">Please select an impact rating.</div>
+            </select>
+        </div>
+        <div class="col-md-6 form-highlight">
+    <label class="form-label">Taxonomy <span class="text-danger" title="Required">*</span> <span class="definition-inline">(Select the risk taxonomy category)</span></label>
+    <select class="form-select" name="taxonomy" required>
+    <option value="">Select</option>
+    <option value="People - Breach of employment legislation or regulatory requirements">People - Breach of employment legislation or regulatory requirements</option>
+    <option value="People - Ineffective employment relations">People - Ineffective employment relations</option>
+    <option value="People - Inadequate workplace safety">People - Inadequate workplace safety</option>
+    <option value="External Fraud - Third party/vendor fraud">External Fraud - Third party/vendor fraud</option>
+    <option value="External Fraud - Agent/broker/intermediary fraud">External Fraud - Agent/broker/intermediary fraud</option>
+    <option value="External Fraud - First party fraud">External Fraud - First party fraud</option>
+    <option value="Internal Fraud - Internal fraud committed against the organisation">Internal Fraud - Internal fraud committed against the organisation</option>
+    <option value="Internal Fraud - Internal fraud committed against customers/clients, or third/fourth parties">Internal Fraud - Internal fraud committed against customers/clients, or third/fourth parties</option>
+    <option value="Physical Security & Safety - Damage to organisation’s physical asset">Physical Security & Safety - Damage to organisation’s physical asset</option>
+    <option value="Physical Security & Safety - Injury to employee or affiliates outside the workplace">Physical Security & Safety - Injury to employee or affiliates outside the workplace</option>
+    <option value="Physical Security & Safety - Damage or injury to public asset">Physical Security & Safety - Damage or injury to public asset</option>
+    <option value="Business Continuity - Inadequate business continuity planning/event management">Business Continuity - Inadequate business continuity planning/event management</option>
+    <option value="Transaction Processing and Execution - Processing/execution failure relating to clients and products">Transaction Processing and Execution - Processing/execution failure relating to clients and products</option>
+    <option value="Transaction Processing and Execution - Processing/execution failure relating to securities and collateral">Transaction Processing and Execution - Processing/execution failure relating to securities and collateral</option>
+    <option value="Transaction Processing and Execution - Processing/execution failure relating to third party">Transaction Processing and Execution - Processing/execution failure relating to third party</option>
+    <option value="Transaction Processing and Execution - Processing/execution failure relating to internal operations">Transaction Processing and Execution - Processing/execution failure relating to internal operations</option>
+    <option value="Transaction Processing and Execution - Change execution failure">Transaction Processing and Execution - Change execution failure</option>
+    <option value="Technology - Hardware failure">Technology - Hardware failure</option>
+    <option value="Technology - Software failure">Technology - Software failure</option>
+    <option value="Technology - Network failure">Technology - Network failure</option>
+    <option value="Conduct - Insider trading">Conduct - Insider trading</option>
+    <option value="Conduct - Anti-trust/anti-competition">Conduct - Anti-trust/anti-competition</option>
+    <option value="Conduct - Improper market practices">Conduct - Improper market practices</option>
+    <option value="Conduct - Pre-sales service failure">Conduct - Pre-sales service failure</option>
+    <option value="Conduct - Post-sales service failure">Conduct - Post-sales service failure</option>
+    <option value="Conduct - Client mistreatment/failure to fulfil duties to customers">Conduct - Client mistreatment/failure to fulfil duties to customers</option>
+    <option value="Conduct - Client account mismanagement">Conduct - Client account mismanagement</option>
+    <option value="Conduct - Improper distribution/marketing">Conduct - Improper distribution/marketing</option>
+    <option value="Conduct - Inadequate product/service design">Conduct - Inadequate product/service design</option>
+    <option value="Conduct - Breach of code of conduct and employee misbehaviour">Conduct - Breach of code of conduct and employee misbehaviour</option>
+    <option value="Legal - Mishandling of legal processes">Legal - Mishandling of legal processes</option>
+    <option value="Legal - Contractual rights/obligation failures">Legal - Contractual rights/obligation failures</option>
+    <option value="Legal - Non-contractual rights/obligation failures">Legal - Non-contractual rights/obligation failures</option>
+    <option value="Financial Crime - Money laundering and terrorism financing">Financial Crime - Money laundering and terrorism financing</option>
+    <option value="Financial Crime - Sanctions violation">Financial Crime - Sanctions violation</option>
+    <option value="Financial Crime - Bribery and corruption">Financial Crime - Bribery and corruption</option>
+    <option value="Financial Crime - KYC and transaction monitoring control failure">Financial Crime - KYC and transaction monitoring control failure</option>
+    <option value="Regulatory Compliance - Ineffective relationship with regulators">Regulatory Compliance - Ineffective relationship with regulators</option>
+    <option value="Regulatory Compliance - Inadequate response to regulatory change">Regulatory Compliance - Inadequate response to regulatory change</option>
+    <option value="Regulatory Compliance - Improper licensing/certification/registration">Regulatory Compliance - Improper licensing/certification/registration</option>
+    <option value="Regulatory Compliance - Breach of cross-border activities/extra-territorial regulations">Regulatory Compliance - Breach of cross-border activities/extra-territorial regulations</option>
+    <option value="Regulatory Compliance - Prudential risk">Regulatory Compliance - Prudential risk</option>
+    <option value="Third Party - Third party management control failure">Third Party - Third party management control failure</option>
+    <option value="Third Party - Third party criminality/non-compliance with rules and regulations">Third Party - Third party criminality/non-compliance with rules and regulations</option>
+    <option value="Third Party - Inadequate intra-group agreements/SLAs">Third Party - Inadequate intra-group agreements/SLAs</option>
+    <option value="Information Security (including Cyber) - Data theft/malicious manipulation of data">Information Security (including Cyber) - Data theft/malicious manipulation of data</option>
+    <option value="Information Security (including Cyber) - Data loss">Information Security (including Cyber) - Data loss</option>
+    <option value="Information Security (including Cyber) - Cyber risk events">Information Security (including Cyber) - Cyber risk events</option>
+    <option value="Information Security (including Cyber) - Data privacy breach/confidentiality mismanagement">Information Security (including Cyber) - Data privacy breach/confidentiality mismanagement</option>
+    <option value="Information Security (including Cyber) - Improper access to data">Information Security (including Cyber) - Improper access to data</option>
+    <option value="Statutory Reporting and Tax - External financial and regulatory reporting failure">Statutory Reporting and Tax - External financial and regulatory reporting failure</option>
+    <option value="Statutory Reporting and Tax - Tax payment/filing failure">Statutory Reporting and Tax - Tax payment/filing failure</option>
+    <option value="Statutory Reporting and Tax - Trade/transaction reporting failure">Statutory Reporting and Tax - Trade/transaction reporting failure</option>
+    <option value="Data Management - Unavailability of data">Data Management - Unavailability of data</option>
+    <option value="Data Management - Poor data quality">Data Management - Poor data quality</option>
+    <option value="Data Management - Inadequate data architecture/IT infrastructure">Data Management - Inadequate data architecture/IT infrastructure</option>
+    <option value="Data Management - Inadequate data storage/retention and destruction management">Data Management - Inadequate data storage/retention and destruction management</option>
+    <option value="Model - Model/methodology design error">Model - Model/methodology design error</option>
+    <option value="Model - Model implementation error">Model - Model implementation error</option>
+    <option value="Model - Model application error">Model - Model application error</option>
+</select>
+<div class="invalid-feedback">Please select taxonomy.</div>
+</div>
+<div class="col-md-6 form-highlight">
+    <label class="form-label">Risk Response <span class="text-danger" title="Required">*</span> <span class="definition-inline">(Action taken or planned to address the risk)</span></label>
+    <select class="form-select" name="risk_response" required>
+    <option value="">Select</option>
+    {% for rr in risk_responses %}
+    <option value="{{ rr }}">{{ rr }}</option>
+    {% endfor %}
+</select>
+<div class="invalid-feedback">Please select a risk response.</div>
+    </select>
+</div>
+        <div class="col-md-6 form-highlight">
+            <label class="form-label">Root Cause Category <span class="text-danger" title="Required">*</span> <span class="definition-inline">(Main cause of the event, e.g., People, Process, Systems)</span></label>
+            <select class="form-select" name="root_cause_category" required>
+    <option value="">Select</option>
+    {% for rc in root_causes %}
+    <option value="{{ rc }}">{{ rc }}</option>
+    {% endfor %}
+</select>
+<div class="invalid-feedback">Please select a root cause category.</div>
+            </select>
+        </div>
+        <div class="col-md-6 form-highlight">
+            <label class="form-label">Add File or Drop from Box <span class="definition-inline">(Attach any supporting document or evidence, optional)</span></label>
+            <input type="file" class="form-control" name="file">
+        </div>
+        <div class="col-12 form-highlight">
+    <div class="d-grid gap-2 d-md-flex justify-content-md-center mt-3">
+        <button type="submit" class="btn btn-primary btn-lg shadow-sm px-5">Submit</button>
+        <button type="button" class="btn btn-outline-secondary btn-lg shadow-sm px-5 ms-md-3" id="draftBtn">Draft</button>
+    </div>
+</div>
+    </form>
+                </div>
+            </div>
+            <div class="text-center text-muted mt-3" style="font-size:0.95rem;">
+    &copy; {{ 2025 }} Your Company Name. All rights reserved.
+</div>
+<div class="text-center mt-2" style="background:#e6f0fa; color:#3b6ea5; font-size:0.97em; padding:8px 0 6px 0; border-radius:8px; max-width:480px; margin:12px auto 0 auto;">
+    For support, contact: <a href="mailto:ops-support@example.com" style="color:#205080; text-decoration:underline;">ops-support@example.com</a>
+</div>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</div>
+<script>
+// Bootstrap validation
+(function () {
+  'use strict'
+  var forms = document.querySelectorAll('.needs-validation')
+  Array.prototype.slice.call(forms)
+    .forEach(function (form) {
+      form.addEventListener('submit', function (event) {
+        if (!form.checkValidity()) {
+          event.preventDefault()
+          event.stopPropagation()
+        }
+        form.classList.add('was-validated')
+      }, false)
+    })
+})()
+</script>
+</body>
+</html>
